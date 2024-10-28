@@ -8,7 +8,9 @@ buttons.forEach(button => {
             audio.currentTime = 0; // Reset the audio to start
         } else {
             audio.src = button.getAttribute('data-sound');
-            audio.play();
+            audio.play().catch(error => {
+                console.error('Error playing audio:', error);
+            });
         }
     });
 });
