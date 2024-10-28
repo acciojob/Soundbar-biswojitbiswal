@@ -1,22 +1,14 @@
-// Get the audio element
-const audio = document.getElementById('audio');
-
-// Get all buttons with the class 'btn'
 const buttons = document.querySelectorAll('.btn');
+const audio = new Audio();
 
-// Add click event listener to each button
 buttons.forEach(button => {
     button.addEventListener('click', () => {
-        const soundFile = button.getAttribute('data-sound');
-        audio.src = soundFile;
-        audio.play().catch(error => {
-            console.error('Error playing audio:', error);
-        });
+        if (button.classList.contains('stop')) {
+            audio.pause();
+            audio.currentTime = 0; // Reset the audio to start
+        } else {
+            audio.src = button.getAttribute('data-sound');
+            audio.play();
+        }
     });
-});
-
-// Add click event listener to the stop button
-document.querySelector('.stop').addEventListener('click', () => {
-    audio.pause();
-    audio.currentTime = 0; // Reset to the start
 });
